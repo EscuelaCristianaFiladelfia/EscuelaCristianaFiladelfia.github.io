@@ -1,0 +1,34 @@
+<div class="header-container">
+    <a href="#" onclick="navigateTo('components/home.html'); closeMobileMenu();" class="header-logo">
+        <img src="assets/img/logo.png" alt="Escuela Cristiana Filadelfia">
+    </a>
+
+    <input hidden="" class="check-icon" id="check-icon" name="check-icon" type="checkbox" onchange="toggleMobileMenu()">
+    <label class="icon-menu" for="check-icon">
+        <div class="bar bar--1"></div>
+        <div class="bar bar--2"></div>
+        <div class="bar bar--3"></div>
+    </label>
+
+    <nav class="main-nav" id="main-nav">
+        <ul class="nav-list">
+            <li><a href="#" onclick="navigateTo('components/home.html'); closeMobileMenu();">Inicio</a></li>
+            
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" onclick="toggleDropdown(event)">Oferta Académica <i class="fas fa-chevron-down" style="font-size: 0.8em; margin-left: 5px;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" onclick="navigateTo('components/cursos/teologia.html'); closeMobileMenu();">Teología</a></li>
+                    <li><a href="#" onclick="navigateTo('components/cursos/escatologia.html'); closeMobileMenu();">Escatología</a></li>
+                    <li><a href="#" onclick="navigateTo('components/cursos/homiletica.html'); closeMobileMenu();">Homilética</a></li>
+                    <li><a href="#" onclick="navigateTo('components/cursos/maestros.html'); closeMobileMenu();">Maestros de Iglesia Local</a></li>
+                    <li><a href="#" onclick="navigateTo('components/cursos/liderazgo.html'); closeMobileMenu();">Liderazgo cristiano</a></li>
+                    <li><a href="#" onclick="navigateTo('components/cursos/sectas.html'); closeMobileMenu();">Sectas / Apologética</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="#" onclick="navigateTo('components/identidad.html'); closeMobileMenu();">Identidad</a></li>
+            <li><a href="#" onclick="navigateTo('components/extension.html'); closeMobileMenu();">Extensión</a></li>
+            <li><a href="#" onclick="navigateTo('components/contacto.html'); closeMobileMenu();">Admisión</a></li>
+        </ul>
+    </nav>
+</div>
