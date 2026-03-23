@@ -723,7 +723,7 @@ ul {
 }
 
 /* --- 10. RESPONSIVE (MEDIA QUERIES PARA CELULARES Y TABLETS) --- */
-@media (max-width: 768px) {
+@media (max-width: 860px) {
     .hero { min-height: 50vh; }
     
     .accordion-grid {
@@ -898,16 +898,16 @@ ul {
 }
 
 /* Ocultar en PC / Mostrar en Móviles */
-@media (min-width: 721px) {
+@media (min-width: 870px) {
     .icon-menu { display: none; }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 869px) {
     .icon-menu { display: flex; }
 }
 /* FIN ICONO HAMBURGUESA ANIMADO */
 
-@media (max-width: 720px) {
+@media (max-width: 870px) {
     /* Logo adaptativo para tablets/celulares horizontales */
     .header-logo img { height: 45px; }
 
@@ -1067,7 +1067,7 @@ ul {
 .cta-container p { max-width: 700px; margin: 0 auto 30px; font-size: 1.1rem; }
 
 /* Responsive ajustes rápidos */
-@media (max-width: 768px) {
+@media (max-width: 869px) {
     .info-grid { grid-template-columns: 1fr; }
     .site-header nav a { display: block; margin: 10px 0; }
 }
