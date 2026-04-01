@@ -63,19 +63,10 @@ ul {
     text-align: center;
 }
 
-.section-tag {
-    color: var(--primary-color);
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    display: block;
-    margin-bottom: 10px;
-}
-
 .section-title {
     font-size: 2rem;
     margin-bottom: 20px;
-    color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 .btn-primary {
@@ -1047,7 +1038,8 @@ ul {
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 .campus-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); /* Obliga a que siempre sean 2 columnas en PC */
     gap: 30px;
 }
 .campus-card {
@@ -1249,6 +1241,10 @@ ul {
         grid-template-columns: 1fr;
         gap: 30px;
     }
+
+    .campus-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* =========================================================
@@ -1351,4 +1347,143 @@ ul {
 
 .cta-section.course-cta {
     border-radius: 10px;
+}
+
+/* =========================================================
+   CINTA PROFESIONAL DE MAESTROS
+   ========================================================= */
+
+.maestros-ticker-section {
+    width: 100%;
+    overflow: hidden;
+    padding: 45px 0;
+    background: white;
+}
+
+.maestros-ticker-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Fade elegante lateral */
+.maestros-ticker-container::before,
+.maestros-ticker-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 120px;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.maestros-ticker-container::before {
+    left: 0;
+    background: linear-gradient(to right, white, transparent);
+}
+
+.maestros-ticker-container::after {
+    right: 0;
+    background: linear-gradient(to left, white, transparent);
+}
+
+/* Velocidad configurable */
+.maestros-ticker-track {
+    display: flex;
+    width: max-content;
+    gap: 70px;
+    animation: cintaMaestros var(--ticker-speed, 30s) linear infinite;
+}
+
+/* Item maestro */
+.maestro-item {
+    display: flex;
+    align-items: center;
+    min-width: 450px;
+    gap: 22px;
+}
+
+/* FOTO CIRCULAR */
+.maestro-item img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--primary-color);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    flex-shrink: 0;
+}
+
+/* Texto */
+.maestro-info {
+    white-space: nowrap;
+}
+
+.maestro-puesto {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+/* Encabezado de la sección */
+.maestros-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.maestros-description {
+    max-width: 800px;
+    margin: 0 auto;
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* NOMBRE CON FADE */
+.maestro-info h3 {
+    font-size: 2rem;
+    margin: 0;
+    color: var(--secondary-color);
+    opacity: 0.95;
+    animation: fadeNombre 3s ease-in-out infinite alternate;
+}
+
+@keyframes fadeNombre {
+    from {
+        opacity: 0.75;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes cintaMaestros {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .maestro-item {
+        min-width: 320px;
+        gap: 15px;
+    }
+
+    .maestro-item img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .maestro-info h3 {
+        font-size: 1.3rem;
+    }
 }

@@ -57,6 +57,7 @@ function navigateTo(componentPath) {
             
             // IMPORTANTE: Volvemos a inicializar los acordeones y sliders de la nueva página cargada
             initInteractiveElements(); 
+            loadMaestrosTicker();
         })
         .catch(err => console.error(err));
 }
@@ -96,4 +97,86 @@ function toggleDropdown(event) {
         const dropdownMenu = event.currentTarget.nextElementSibling;
         dropdownMenu.classList.toggle('active');
     }
+}
+
+function renderMaestrosTicker() {
+    const maestros = [
+        {
+            nombre: "Pbro. Nazario Vázquez",
+            puesto: "Pastor",
+            imagen: "assets/img/maestros/Nazario-Vazquez.jpg"
+        },
+        {
+            nombre: "Juan Cavazos",
+            puesto: "Maestro",
+            imagen: "assets/img/maestros/Juan-Cavazos.jpg"
+        },
+        {
+            nombre: "Pbro. Ricardo Vázquez",
+            puesto: "Pastor",
+            imagen: "assets/img/maestros/Ricardo-Vazquez.jpg"
+        },
+        {
+            nombre: "Rubén Sánchez",
+            puesto: "Maestro",
+            imagen: "assets/img/maestros/Ruben-Sanchez.jpg"
+        },
+        {
+            nombre: "Pbro. Oscar Brambila",
+            puesto: "Pastor",
+            imagen: "assets/img/maestros/Oscar-Brambila.jpg"
+        },
+        {
+            nombre: "Rocío Garza",
+            puesto: "Maestra",
+            imagen: "assets/img/maestros/Rocio-Garza.jpg"
+        },
+        {
+            nombre: "Pbro. Hector Ponce",
+            puesto: "Pastor",
+            imagen: "assets/img/maestros/Hector-Ponce.jpg"
+        },
+        {
+            nombre: "Alberto Echartea",
+            puesto: "Evangelista",
+            imagen: "assets/img/maestros/Alberto-Echartea.jpg"
+        },
+    ];
+
+    const track = document.getElementById('maestros-track');
+    if (!track) return;
+
+    let contenido = '';
+
+    maestros.forEach(maestro => {
+        contenido += `
+            <div class="maestro-item">
+                <img src="${maestro.imagen}" alt="${maestro.nombre}">
+                <div class="maestro-info">
+                    <span class="maestro-puesto">${maestro.puesto}</span>
+                    <h3>${maestro.nombre}</h3>
+                </div>
+            </div>
+        `;
+    });
+
+    // Duplicado automático
+    track.innerHTML = contenido + contenido;
+
+    // Velocidad configurable
+    track.style.setProperty('--ticker-speed', `${maestros.length * 6}s`);
+}
+
+function loadMaestrosTicker() {
+    const placeholder = document.getElementById('maestros-cinta-placeholder');
+
+    if (!placeholder) return;
+
+    fetch('components/maestros-cinta.html')
+        .then(response => response.text())
+        .then(html => {
+            placeholder.innerHTML = html;
+            renderMaestrosTicker();
+        })
+        .catch(err => console.error('Error cargando cinta:', err));
 }
