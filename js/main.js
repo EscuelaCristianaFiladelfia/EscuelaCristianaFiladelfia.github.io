@@ -109,37 +109,82 @@ function renderMaestrosTicker() {
         {
             nombre: "Juan Cavazos",
             puesto: "Maestro",
-            imagen: "assets/img/maestros/Juan-Cavazos.jpg"
+            imagen: "assets/img/maestros/Juan-Cavazos.png"
         },
         {
             nombre: "Pbro. Ricardo Vázquez",
             puesto: "Pastor",
-            imagen: "assets/img/maestros/Ricardo-Vazquez.jpg"
+            imagen: "assets/img/maestros/Ricardo-Vazquez.png"
         },
         {
             nombre: "Rubén Sánchez",
             puesto: "Maestro",
-            imagen: "assets/img/maestros/Ruben-Sanchez.jpg"
+            imagen: "assets/img/maestros/Ruben-Sanchez.png"
         },
         {
             nombre: "Pbro. Oscar Brambila",
             puesto: "Pastor",
-            imagen: "assets/img/maestros/Oscar-Brambila.jpg"
+            imagen: "assets/img/maestros/Oscar-Brambila.png"
         },
         {
             nombre: "Rocío Garza",
             puesto: "Maestra",
-            imagen: "assets/img/maestros/Rocio-Garza.jpg"
+            imagen: "assets/img/maestros/Rocio-Garza.png"
         },
         {
             nombre: "Pbro. Hector Ponce",
             puesto: "Pastor",
-            imagen: "assets/img/maestros/Hector-Ponce.jpg"
+            imagen: "assets/img/maestros/Hector-Ponce.png"
         },
         {
             nombre: "Alberto Echartea",
             puesto: "Evangelista",
-            imagen: "assets/img/maestros/Alberto-Echartea.jpg"
+            imagen: "assets/img/maestros/Alberto-Echartea.png"
+        },
+        {
+            nombre: "Delia Díaz G.",
+            puesto: "Maestra",
+            imagen: "assets/img/maestros/Delia-Diaz.png"
+        },
+        {
+            nombre: "Pbro. Ruperto Nava",
+            puesto: "Pastor",
+            imagen: "assets/img/maestros/Ruperto-Nava.png"
+        },
+        {
+            nombre: "María de Jesús Pérez",
+            puesto: "Maestra",
+            imagen: "assets/img/maestros/Maria-Perez.png"
+        },
+        {
+            nombre: "Azareel Pérez Zapata",
+            puesto: "Pastor",
+            imagen: "assets/img/maestros/Azareel-Zapata.png"
+        },
+        {
+            nombre: "Abel Ramírez",
+            puesto: "Maestro",
+            imagen: "assets/img/maestros/Abel-Ramirez.png"
+        },
+        {
+            nombre: "Pbra. Beatriz Medina",
+            puesto: "Pastora",
+            imagen: "assets/img/maestros/Betty-Medina.png"
+        },
+        {
+            nombre: "Daniel López M.",
+            puesto: "Maestro",
+            imagen: "assets/img/maestros/Daniel-Lopez.png"
+        },
+        {
+            nombre: "Pbra. Yolanda Alanís",
+            puesto: "Pastora",
+            imagen: "assets/img/maestros/Yolanda-Alanis.png"
+        },
+        {
+            nombre: "Mayra Huerta",
+            puesto: "Maestra",
+            imagen: "assets/img/maestros/Mayra-Huerta.png"
         },
     ];
 
