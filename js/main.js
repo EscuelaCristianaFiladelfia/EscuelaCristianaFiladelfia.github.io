@@ -196,6 +196,7 @@ function renderMaestrosTicker() {
     maestros.forEach(maestro => {
         contenido += `
             <div class="maestro-item">
+                <img src="${maestro.imagen}" alt="${maestro.nombre}">
                 <div class="maestro-info">
                     <span class="maestro-puesto">${maestro.puesto}</span>
                     <h3>${maestro.nombre}</h3>
