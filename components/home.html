@@ -1,4 +1,5 @@
 <header class="hero" style="background-image: linear-gradient(rgba(0, 50, 0, 0.75), rgba(0, 80, 0, 0.6)), url('assets/img/Sede.jpg');">
+    <div id="particles-container"></div>
     <img src="assets/img/Escudo.png" alt="Escudo Filadelfia" class="hero-logo">
     
     <h1>Escuela Cristiana Filadelfia</h1>
@@ -23,57 +24,111 @@
         </div>
 
         <div class="grid-cards stagger-children">
-            <article class="card">
-                <div class="card-body">
-                    <h3>Curso de Teología</h3>
-                    <p>Estudio sistemático de la doctrina bíblica: Bibliología, Cristología, Soteriología, Neumatología y Eclesiología.</p>
-                    <br>
-                    <a href="#" onclick="navigateTo('components/cursos/teologia.html'); closeMobileMenu();" class="card-link">Ver plan de estudios →</a>
+            <article class="card card-flip">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-body">
+                            <h3>Curso de Teología</h3>
+                            <p>Estudio sistemático de la doctrina bíblica: Bibliología, Cristología, Soteriología, Neumatología y Eclesiología.</p>
+                            <br>
+                            <a href="#" onclick="navigateTo('components/cursos/teologia.html'); closeMobileMenu();" class="card-link">Ver plan →</a>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3>Teología</h3>
+                        <p>6 materias · 1 año de estudio<br>Fundamentos doctrinales para un ministerio sólido.</p>
+                        <a href="#" onclick="navigateTo('components/cursos/teologia.html'); closeMobileMenu();" class="btn-flip">Ver más</a>
+                    </div>
                 </div>
             </article>
 
-            <article class="card">
-                <div class="card-body">
-                    <h3>Curso de Homilética</h3>
-                    <p>Formación en predicación bíblica mediante homilética, hermenéutica, exégesis del Nuevo Testamento y bases de griego.</p>
-                    <br>
-                    <a href="#" onclick="navigateTo('components/cursos/homiletica.html'); closeMobileMenu();" class="card-link">Ver plan de estudios →</a>
+            <article class="card card-flip">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-body">
+                            <h3>Curso de Homilética</h3>
+                            <p>Formación en predicación bíblica mediante homilética, hermenéutica, exégesis del Nuevo Testamento y bases de griego.</p>
+                            <br>
+                            <a href="#" onclick="navigateTo('components/cursos/homiletica.html'); closeMobileMenu();" class="card-link">Ver plan →</a>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3>Homilética</h3>
+                        <p>4 materias · 1 año de estudio<br>El arte y la ciencia de la predicación bíblica.</p>
+                        <a href="#" onclick="navigateTo('components/cursos/homiletica.html'); closeMobileMenu();" class="btn-flip">Ver más</a>
+                    </div>
                 </div>
             </article>
 
-            <article class="card">
-                <div class="card-body">
-                    <h3>Curso de Escatología</h3>
-                    <p>Estudio de la profecía bíblica y eventos finales analizando Daniel, Apocalipsis y periodos bíblicos.</p>
-                    <br>
-                    <a href="#" onclick="navigateTo('components/cursos/escatologia.html'); closeMobileMenu();" class="card-link">Ver plan de estudios →</a>
+            <article class="card card-flip">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-body">
+                            <h3>Curso de Escatología</h3>
+                            <p>Estudio de la profecía bíblica y eventos finales analizando Daniel, Apocalipsis y periodos bíblicos.</p>
+                            <br>
+                            <a href="#" onclick="navigateTo('components/cursos/escatologia.html'); closeMobileMenu();" class="card-link">Ver plan →</a>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3>Escatología</h3>
+                        <p>5 materias · 1 año de estudio<br>Comprendiendo el plan profético de Dios.</p>
+                        <a href="#" onclick="navigateTo('components/cursos/escatologia.html'); closeMobileMenu();" class="btn-flip">Ver más</a>
+                    </div>
                 </div>
             </article>
 
-            <article class="card">
-                <div class="card-body">
-                    <h3>Curso para Maestro de Iglesia Local</h3>
-                    <p>Capacitación para enseñar en la iglesia: pedagogía, didáctica, interpretación bíblica y organización educativa.</p>
-                    <br>
-                    <a href="#" onclick="navigateTo('components/cursos/maestros.html'); closeMobileMenu();" class="card-link">Ver plan de estudios →</a>
+            <article class="card card-flip">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-body">
+                            <h3>Curso para Maestro de Iglesia Local</h3>
+                            <p>Capacitación para enseñar en la iglesia: pedagogía, didáctica, interpretación bíblica y organización educativa.</p>
+                            <br>
+                            <a href="#" onclick="navigateTo('components/cursos/maestros.html'); closeMobileMenu();" class="card-link">Ver plan →</a>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3>Maestros EBL</h3>
+                        <p>13 materias · 1 año de estudio<br>Excelencia en la enseñanza de la Palabra.</p>
+                        <a href="#" onclick="navigateTo('components/cursos/maestros.html'); closeMobileMenu();" class="btn-flip">Ver más</a>
+                    </div>
                 </div>
             </article>
 
-            <article class="card">
-                <div class="card-body">
-                    <h3>Curso de Liderazgo Cristiano</h3>
-                    <p>Principios bíblicos y herramientas prácticas para liderar con servicio, carácter y organización en la iglesia.</p>
-                    <br>
-                    <a href="#" onclick="navigateTo('components/cursos/liderazgo.html'); closeMobileMenu();" class="card-link">Ver plan de estudios →</a>
+            <article class="card card-flip">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-body">
+                            <h3>Curso de Liderazgo Cristiano</h3>
+                            <p>Principios bíblicos y herramientas prácticas para liderar con servicio, carácter y organización en la iglesia.</p>
+                            <br>
+                            <a href="#" onclick="navigateTo('components/cursos/liderazgo.html'); closeMobileMenu();" class="card-link">Ver plan →</a>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3>Liderazgo</h3>
+                        <p>20 materias · 1 año de estudio<br>Desarrolla líderes con integridad y visión.</p>
+                        <a href="#" onclick="navigateTo('components/cursos/liderazgo.html'); closeMobileMenu();" class="btn-flip">Ver más</a>
+                    </div>
                 </div>
             </article>
 
-            <article class="card">
-                <div class="card-body">
-                    <h3>Curso de Sectas</h3>
-                    <p>Análisis de sectas contemporáneas y formación apologética para defender la fe con fundamentos bíblicos.</p>
-                    <br>
-                    <a href="#" onclick="navigateTo('components/cursos/sectas.html'); closeMobileMenu();" class="card-link">Ver plan de estudios →</a>
+            <article class="card card-flip">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-body">
+                            <h3>Curso de Sectas</h3>
+                            <p>Análisis de sectas contemporáneas y formación apologética para defender la fe con fundamentos bíblicos.</p>
+                            <br>
+                            <a href="#" onclick="navigateTo('components/cursos/sectas.html'); closeMobileMenu();" class="card-link">Ver plan →</a>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3>Sectas</h3>
+                        <p>6 materias · 1 año de estudio<br>Defensa de la fe con mansedumbre y verdad.</p>
+                        <a href="#" onclick="navigateTo('components/cursos/sectas.html'); closeMobileMenu();" class="btn-flip">Ver más</a>
+                    </div>
                 </div>
             </article>
         </div>
