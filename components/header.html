@@ -1,10 +1,10 @@
 <div class="header-container">
-    <a href="#" onclick="navigateTo('components/home.html'); closeMobileMenu();" class="header-logo">
-        <img src="assets/img/logo.png" alt="Escuela Cristiana Filadelfia">
+    <a href="#" onclick="navigateTo('components/home.html'); closeMobileMenu();" class="header-logo" aria-label="Ir al inicio">
+        <img src="assets/img/logo.png" alt="Escuela Cristiana Filadelfia - Inicio">
     </a>
 
-    <input hidden="" class="check-icon" id="check-icon" name="check-icon" type="checkbox" onchange="toggleMobileMenu()">
-    <label class="icon-menu" for="check-icon">
+    <input hidden="" class="check-icon" id="check-icon" name="check-icon" type="checkbox" onchange="toggleMobileMenu()" aria-label="Abrir menú de navegación">
+    <label class="icon-menu" for="check-icon" aria-label="Menú">
         <div class="bar bar--1"></div>
         <div class="bar bar--2"></div>
         <div class="bar bar--3"></div>

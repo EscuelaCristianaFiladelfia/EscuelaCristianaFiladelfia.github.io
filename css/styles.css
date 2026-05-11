@@ -100,7 +100,7 @@ ul {
     min-height: 60vh;
     width: 100%;
     /* La imagen de fondo predeterminada */
-    background-image: linear-gradient(rgba(0, 50, 0, 0.75), rgba(0, 80, 0, 0.6)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background-image: linear-gradient(rgba(0, 50, 0, 0.75), rgba(0, 80, 0, 0.6)), url('assets/img/Sede.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -113,13 +113,14 @@ ul {
 }
 
 .hero-logo {
-    width: 140px;
+    width: clamp(90px, 12vw, 160px);
     height: auto;
     margin-bottom: 25px;
     border-radius: 50%;
     background: rgba(255,255,255,0.95);
     padding: 5px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    animation: heroLogoEntrance 0.8s ease-out;
 }
 
 .hero h1 {
@@ -363,7 +364,7 @@ ul {
 
 .accordion-content.open {
     padding: 20px 20px 20px 70px;
-    max-height: 500px;
+    max-height: 3000px;
     border-color: #eee;
     text-align: justify;
 }
@@ -820,7 +821,29 @@ ul {
 
 /* Ocultar botón hamburguesa en PC y activar hover del submenú */
 @media (min-width: 721px) {
-    .dropdown:hover .dropdown-menu { display: block; }
+    .dropdown:hover .dropdown-menu {
+        display: block;
+        animation: dropdownFadeIn 0.2s ease-out;
+    }
+    .dropdown-menu {
+        display: none;
+        opacity: 0;
+        animation: none;
+    }
+    .dropdown:hover .dropdown-menu {
+        opacity: 1;
+    }
+}
+
+@keyframes dropdownFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* --- NUEVO ICONO HAMBURGUESA ANIMADO --- */
@@ -1236,6 +1259,12 @@ ul {
 }
 
 /* Hacer que baje a una columna en Celulares o Tablets */
+@media (max-width: 1024px) {
+    .campus-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .info-container {
         grid-template-columns: 1fr;
@@ -1244,6 +1273,24 @@ ul {
 
     .campus-grid {
         grid-template-columns: 1fr;
+    }
+
+    .icon-container .tooltip {
+        display: none;
+    }
+
+    .maestro-item {
+        min-width: 280px;
+        gap: 12px;
+    }
+
+    .maestro-item img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .maestro-info h3 {
+        font-size: 1.1rem;
     }
 }
 
@@ -1472,18 +1519,439 @@ ul {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (min-width: 769px) and (max-width: 1024px) {
     .maestro-item {
-        min-width: 320px;
-        gap: 15px;
+        min-width: 350px;
+        gap: 18px;
     }
 
     .maestro-item img {
-        width: 90px;
-        height: 90px;
+        width: 100px;
+        height: 100px;
     }
 
     .maestro-info h3 {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
+}
+
+@media (max-width: 768px) {
+    .maestro-item {
+        min-width: 280px;
+        gap: 12px;
+    }
+
+    .maestro-item img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .maestro-info h3 {
+        font-size: 1.1rem;
+    }
+}
+
+/* =========================================================
+   ANIMACIONES Y MEJORAS UX/UI
+   ========================================================= */
+
+/* --- KEYFRAMES GLOBALES --- */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes heroLogoEntrance {
+    from { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+    to   { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@keyframes bounceDown {
+    0%, 100% { transform: translateY(0); opacity: 0.7; }
+    50%      { transform: translateY(8px); opacity: 1; }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes rippleEffect {
+    to { transform: scale(4); opacity: 0; }
+}
+
+/* --- CLASES DE ANIMACIÓN REUTILIZABLES --- */
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in-down {
+    animation: fadeInDown 0.5s ease-out forwards;
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.animate-on-scroll-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.animate-on-scroll-right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Stagger children */
+.stagger-children > * {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.12s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.19s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.26s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.33s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.40s; }
+.stagger-children > *:nth-child(7) { animation-delay: 0.47s; }
+.stagger-children > *:nth-child(8) { animation-delay: 0.54s; }
+.stagger-children > *:nth-child(9) { animation-delay: 0.61s; }
+.stagger-children > *:nth-child(10) { animation-delay: 0.68s; }
+
+/* --- TRANSICIÓN DE PÁGINA (SPA) --- */
+#main-content {
+    transition: opacity 0.25s ease;
+}
+
+#main-content.page-exiting {
+    opacity: 0;
+}
+
+/* --- LOADING SPINNER --- */
+.page-loader {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(255,255,255,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(2px);
+}
+
+.page-loader.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.page-loader .spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #e0e0e0;
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* --- SCROLL INDICATOR (FLECHA EN HERO) --- */
+.scroll-indicator {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.7);
+    font-size: 1.5rem;
+    animation: bounceDown 2s ease-in-out infinite;
+    cursor: pointer;
+    transition: color 0.3s, opacity 0.3s;
+    z-index: 5;
+}
+
+.scroll-indicator:hover {
+    color: white;
+}
+
+.scroll-indicator.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* --- RIPPLE EFFECT EN BOTONES --- */
+.btn-primary, .btn-whatsapp-large, .fb-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    transform: scale(0);
+    animation: rippleEffect 0.6s ease-out;
+    pointer-events: none;
+}
+
+/* --- MEJORA: HERO TITLE ENTRANCE --- */
+.hero h1 {
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.hero p {
+    animation: fadeInUp 0.8s ease-out 0.35s both;
+}
+
+.hero .btn-primary {
+    animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+
+.hero .breadcrumb {
+    animation: fadeInDown 0.5s ease-out both;
+}
+
+/* --- MEJORA: CARDS EN HOME --- */
+.grid-cards .card {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.grid-cards .card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 30px rgba(0,0,0,0.12);
+}
+
+/* --- STEP CARDS CONTACTO --- */
+.step-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+.step-number {
+    transition: transform 0.3s ease;
+}
+
+.step-card:hover .step-number {
+    transform: scale(1.15);
+}
+
+/* --- SPLIDE CARD HOVER --- */
+.sire-ann-card {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.sire-ann-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* --- CAMPUS CARD HOVER --- */
+.campus-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.campus-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+/* --- SUBJECT ITEM HOVER --- */
+.subject-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.subject-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* --- BREADCRUMB HOVER --- */
+.breadcrumb {
+    transition: background-color 0.3s ease;
+}
+
+/* --- SECTION TAG BADGE --- */
+.section-tag {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+/* --- MEJORA FOOTER SOCIAL ICONS --- */
+.social-icon {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+/* --- RESPONSIVE 4K --- */
+@media (min-width: 2000px) {
+    .container {
+        max-width: 1400px;
+    }
+
+    .hero {
+        min-height: 50vh;
+    }
+
+    .hero h1 {
+        font-size: clamp(2.5rem, 3.5vw, 4rem);
+    }
+
+    .hero p {
+        font-size: clamp(1.2rem, 1.5vw, 1.6rem);
+    }
+
+    .grid-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .section-padding {
+        padding: 80px 20px;
+    }
+}
+
+/* --- RESPONSIVE TABLET VERTICAL --- */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .grid-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .campus-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* --- KEYBOARD FOCUS --- */
+a:focus-visible,
+button:focus-visible,
+.btn-primary:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* --- ACCORDION SMOOTH ICON ROTATE --- */
+.accordion-header .toggle-icon {
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* --- MAESTRO TICKER HOVER PAUSE --- */
+.maestros-ticker-track {
+    animation: cintaMaestros var(--ticker-speed, 30s) linear infinite;
+}
+
+.maestros-ticker-container:hover .maestros-ticker-track {
+    animation-play-state: paused;
+}
+
+/* --- WAVE DIVIDER (OPCIONAL ENTRE SECCIONES) --- */
+.wave-divider {
+    display: block;
+    width: 100%;
+    height: 60px;
+    background: var(--gray-light);
+    clip-path: polygon(0 0, 100% 40%, 100% 100%, 0 60%);
+    margin-bottom: -1px;
+}
+
+/* --- CANONICAL URL TOOLTIP IN FOOTER (MOBILE FIX) --- */
+@media (max-width: 480px) {
+    .location-container .tooltip {
+        white-space: normal;
+        font-size: 12px;
+        max-width: 200px;
+        text-align: center;
+    }
+}
+
+/* --- SKIP TO CONTENT (ACCESIBILIDAD) --- */
+.skip-to-content {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 0 0 8px 8px;
+    z-index: 10000;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: top 0.3s ease;
+    text-decoration: none;
+}
+
+.skip-to-content:focus {
+    top: 0;
+    outline: 3px solid white;
+    outline-offset: 2px;
 }
