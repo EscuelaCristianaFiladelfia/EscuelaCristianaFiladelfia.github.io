@@ -743,10 +743,10 @@ ul {
 
 /* --- HEADER Y NAVEGACIÓN --- */
 .site-header {
-    background-color: var(--secondary-color);
+    background-color: #111;
     padding: 10px 20px;
     box-shadow: 0 2px 15px rgba(0,0,0,0.2);
-    position: sticky; /* Hace que el menú persiga al usuario al bajar */
+    position: sticky;
     top: 0;
     z-index: 1000;
 }
@@ -2221,6 +2221,10 @@ button:focus-visible,
 
 [data-theme="dark"] .step-number {
     background: #00a000;
+}
+
+[data-theme="dark"] .whatsapp-float {
+    color: white;
 }
 
 /* Dark mode toggle button */
