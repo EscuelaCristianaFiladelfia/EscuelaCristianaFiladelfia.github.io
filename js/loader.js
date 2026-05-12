@@ -35,11 +35,16 @@ function loadComponent(elementId, filePath) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    loadComponent("inject-header", "components/header.html");
+    loadComponent("inject-header", "components/header.html").then(() => {
+        if (typeof initDarkMode === 'function') initDarkMode();
+    });
     loadComponent("inject-footer", "components/footer.html");
     loadComponent("main-content", "components/home.html").then(() => {
         initInteractiveElements();
         initScrollAnimations();
+        initScrollIndicator();
+        initRippleEffect();
+        initParticles();
         hideLoader();
     });
 });

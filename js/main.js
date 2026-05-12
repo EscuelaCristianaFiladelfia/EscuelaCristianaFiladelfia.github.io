@@ -47,50 +47,6 @@ function initSplide() {
 }
 
 /* ==========================================================
-   NAVEGACIÓN SPA CON TRANSICIÓN
-   ========================================================== */
-function navigateTo(componentPath) {
-    const mainContent = document.getElementById('main-content');
-    const loader = document.getElementById('page-loader');
-
-    if (loader) loader.classList.add('active');
-    mainContent.classList.add('page-exiting');
-
-    setTimeout(() => {
-        fetch(componentPath)
-            .then(response => {
-                if (!response.ok) throw new Error("No se encontró " + componentPath);
-                return response.text();
-            })
-            .then(data => {
-                mainContent.innerHTML = data;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                mainContent.classList.remove('page-exiting');
-
-                initInteractiveElements();
-                loadMaestrosTicker();
-                initScrollAnimations();
-                initScrollIndicator();
-                initRippleEffect();
-
-                if (loader) loader.classList.remove('active');
-            })
-            .catch(err => {
-                console.error(err);
-                mainContent.innerHTML = `
-                    <div style="text-align:center;padding:80px 20px;">
-                        <h2 style="color:var(--primary-color);">Página no encontrada</h2>
-                        <p style="color:#666;margin-bottom:20px;">Lo sentimos, no pudimos cargar esta sección.</p>
-                        <a href="#" onclick="navigateTo('components/home.html')" class="btn-primary">Ir al inicio</a>
-                    </div>
-                `;
-                mainContent.classList.remove('page-exiting');
-                if (loader) loader.classList.remove('active');
-            });
-    }, 150);
-}
-
-/* ==========================================================
    SCROLL ANIMATIONS (INTERSECTION OBSERVER)
    ========================================================== */
 function initScrollAnimations() {
@@ -243,8 +199,8 @@ function renderMaestrosTicker() {
 
 function loadMaestrosTicker() {
     const placeholder = document.getElementById('maestros-cinta-placeholder');
-    if (!placeholder) return;
-    fetch('components/maestros-cinta.html')
+    if (!placeholder) return Promise.resolve();
+    return fetch('components/maestros-cinta.html')
         .then(response => response.text())
         .then(html => {
             placeholder.innerHTML = html;
@@ -254,9 +210,213 @@ function loadMaestrosTicker() {
 }
 
 /* ==========================================================
+   DARK MODE TOGGLE
+   ========================================================== */
+function initDarkMode() {
+    const toggle = document.getElementById('dark-mode-toggle');
+    if (!toggle) return;
+
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        toggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+
+    toggle.addEventListener('click', () => {
+        const html = document.documentElement;
+        const isDark = html.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+            html.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            toggle.innerHTML = '<i class="fas fa-moon"></i>';
+        } else {
+            html.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            toggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+    });
+}
+
+/* ==========================================================
+   TILT 3D EN CARDS
+   ========================================================== */
+function initTilt3D() {
+    document.querySelectorAll('.tilt-3d').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            card.style.transform = `
+                perspective(800px)
+                rotateY(${x * 8}deg)
+                rotateX(${-y * 8}deg)
+            `;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(800px) rotateY(0) rotateX(0)';
+        });
+    });
+}
+
+/* ==========================================================
+   SCROLL PROGRESS BAR
+   ========================================================== */
+function initScrollProgress() {
+    const bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+    window.addEventListener('scroll', () => {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (window.scrollY / scrollable) * 100;
+        bar.style.width = progress + '%';
+    }, { passive: true });
+}
+
+/* ==========================================================
+   CONTADORES ANIMADOS
+   ========================================================== */
+function initCounters() {
+    document.querySelectorAll('.stat-number').forEach(el => {
+        const target = parseInt(el.dataset.target, 10);
+        if (isNaN(target)) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(el, target);
+                    observer.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        observer.observe(el);
+    });
+}
+
+function animateCounter(el, target, duration = 2000) {
+    let start = 0;
+    const step = Math.ceil(target / (duration / 16));
+    const timer = setInterval(() => {
+        start += step;
+        if (start >= target) {
+            start = target;
+            clearInterval(timer);
+        }
+        el.textContent = start;
+    }, 16);
+}
+
+/* ==========================================================
+   PARTICLES (carga async desde CDN)
+   ========================================================== */
+function initParticles() {
+    const container = document.getElementById('particles-container');
+    if (!container) return;
+    if (typeof tsParticles !== 'undefined') {
+        loadParticles();
+    }
+}
+
+function loadParticles() {
+    if (!document.getElementById('particles-container')) return;
+    tsParticles.load('particles-container', {
+        fpsLimit: 60,
+        particles: {
+            number: { value: 35, density: { enable: true } },
+            color: { value: '#ffffff' },
+            shape: { type: 'circle' },
+            opacity: { value: 0.25, random: true },
+            size: { value: 3, random: { enable: true, minimumValue: 1 } },
+            links: { enable: false },
+            move: {
+                enable: true,
+                speed: 0.6,
+                direction: 'none',
+                random: true,
+                straight: false,
+                outModes: 'bounce'
+            }
+        },
+        interactivity: {
+            events: {
+                onHover: { enable: true, mode: 'bubble' },
+                onClick: { enable: true, mode: 'push' }
+            },
+            modes: {
+                bubble: { distance: 150, size: 5, opacity: 0.4 },
+                push: { quantity: 3 }
+            }
+        },
+        background: { color: 'transparent' },
+        detectRetina: true
+    });
+}
+
+window.loadParticles = loadParticles;
+
+/* ==========================================================
+   VIEW TRANSITIONS API (Progressive Enhancement)
+   ========================================================== */
+function navigateTo(componentPath) {
+    const mainContent = document.getElementById('main-content');
+    const loader = document.getElementById('page-loader');
+
+    const doNavigation = () => {
+        if (loader) loader.classList.add('active');
+        mainContent.classList.add('page-exiting');
+
+        setTimeout(() => {
+            fetch(componentPath)
+                .then(response => {
+                    if (!response.ok) throw new Error("No se encontró " + componentPath);
+                    return response.text();
+                })
+                .then(data => {
+                    mainContent.innerHTML = data;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    mainContent.classList.remove('page-exiting');
+
+                    initInteractiveElements();
+                    loadMaestrosTicker().then(() => {
+                        initScrollAnimations();
+                    });
+                    initScrollIndicator();
+                    initRippleEffect();
+                    initTilt3D();
+                    initCounters();
+                    initParticles();
+
+                    if (loader) loader.classList.remove('active');
+                })
+                .catch(err => {
+                    console.error(err);
+                    mainContent.innerHTML = `
+                        <div style="text-align:center;padding:80px 20px;">
+                            <h2 style="color:var(--primary-color);">Página no encontrada</h2>
+                            <p style="color:#666;margin-bottom:20px;">Lo sentimos, no pudimos cargar esta sección.</p>
+                            <a href="#" onclick="navigateTo('components/home.html')" class="btn-primary">Ir al inicio</a>
+                        </div>
+                    `;
+                    mainContent.classList.remove('page-exiting');
+                    if (loader) loader.classList.remove('active');
+                });
+        }, 150);
+    };
+
+    if (document.startViewTransition) {
+        document.startViewTransition(doNavigation);
+    } else {
+        doNavigation();
+    }
+}
+
+/* ==========================================================
    INICIALIZACIÓN GLOBAL
    ========================================================== */
 document.addEventListener('DOMContentLoaded', () => {
+    initDarkMode();
+    initScrollProgress();
+    initTilt3D();
+    initCounters();
+    initParticles();
     setTimeout(() => {
         initRippleEffect();
         initScrollAnimations();
