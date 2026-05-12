@@ -1904,10 +1904,7 @@ button:focus-visible,
     transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-/* --- MAESTRO TICKER HOVER PAUSE --- */
-.maestros-ticker-container:hover .maestros-ticker-track {
-    animation-play-state: paused;
-}
+/* --- MAESTRO TICKER NO PAUSE ON HOVER --- */
 
 /* --- WAVE DIVIDER (OPCIONAL ENTRE SECCIONES) --- */
 .wave-divider {
