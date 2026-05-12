@@ -47,50 +47,6 @@ function initSplide() {
 }
 
 /* ==========================================================
-   NAVEGACIÓN SPA CON TRANSICIÓN
-   ========================================================== */
-function navigateTo(componentPath) {
-    const mainContent = document.getElementById('main-content');
-    const loader = document.getElementById('page-loader');
-
-    if (loader) loader.classList.add('active');
-    mainContent.classList.add('page-exiting');
-
-    setTimeout(() => {
-        fetch(componentPath)
-            .then(response => {
-                if (!response.ok) throw new Error("No se encontró " + componentPath);
-                return response.text();
-            })
-            .then(data => {
-                mainContent.innerHTML = data;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                mainContent.classList.remove('page-exiting');
-
-                initInteractiveElements();
-                loadMaestrosTicker();
-                initScrollAnimations();
-                initScrollIndicator();
-                initRippleEffect();
-
-                if (loader) loader.classList.remove('active');
-            })
-            .catch(err => {
-                console.error(err);
-                mainContent.innerHTML = `
-                    <div style="text-align:center;padding:80px 20px;">
-                        <h2 style="color:var(--primary-color);">Página no encontrada</h2>
-                        <p style="color:#666;margin-bottom:20px;">Lo sentimos, no pudimos cargar esta sección.</p>
-                        <a href="#" onclick="navigateTo('components/home.html')" class="btn-primary">Ir al inicio</a>
-                    </div>
-                `;
-                mainContent.classList.remove('page-exiting');
-                if (loader) loader.classList.remove('active');
-            });
-    }, 150);
-}
-
-/* ==========================================================
    SCROLL ANIMATIONS (INTERSECTION OBSERVER)
    ========================================================== */
 function initScrollAnimations() {
@@ -243,8 +199,8 @@ function renderMaestrosTicker() {
 
 function loadMaestrosTicker() {
     const placeholder = document.getElementById('maestros-cinta-placeholder');
-    if (!placeholder) return;
-    fetch('components/maestros-cinta.html')
+    if (!placeholder) return Promise.resolve();
+    return fetch('components/maestros-cinta.html')
         .then(response => response.text())
         .then(html => {
             placeholder.innerHTML = html;
@@ -349,43 +305,52 @@ function animateCounter(el, target, duration = 2000) {
 }
 
 /* ==========================================================
-   PARTICLES
+   PARTICLES (carga async desde CDN)
    ========================================================== */
 function initParticles() {
-    if (typeof tsParticles !== 'undefined' && document.getElementById('particles-container')) {
-        tsParticles.load('particles-container', {
-            fpsLimit: 60,
-            particles: {
-                number: { value: 35, density: { enable: true } },
-                color: { value: '#ffffff' },
-                shape: { type: 'circle' },
-                opacity: { value: 0.25, random: true },
-                size: { value: 3, random: { enable: true, minimumValue: 1 } },
-                links: { enable: false },
-                move: {
-                    enable: true,
-                    speed: 0.6,
-                    direction: 'none',
-                    random: true,
-                    straight: false,
-                    outModes: 'bounce'
-                }
-            },
-            interactivity: {
-                events: {
-                    onHover: { enable: true, mode: 'bubble' },
-                    onClick: { enable: true, mode: 'push' }
-                },
-                modes: {
-                    bubble: { distance: 150, size: 5, opacity: 0.4 },
-                    push: { quantity: 3 }
-                }
-            },
-            background: { color: 'transparent' },
-            detectRetina: true
-        });
+    const container = document.getElementById('particles-container');
+    if (!container) return;
+    if (typeof tsParticles !== 'undefined') {
+        loadParticles();
     }
 }
+
+function loadParticles() {
+    if (!document.getElementById('particles-container')) return;
+    tsParticles.load('particles-container', {
+        fpsLimit: 60,
+        particles: {
+            number: { value: 35, density: { enable: true } },
+            color: { value: '#ffffff' },
+            shape: { type: 'circle' },
+            opacity: { value: 0.25, random: true },
+            size: { value: 3, random: { enable: true, minimumValue: 1 } },
+            links: { enable: false },
+            move: {
+                enable: true,
+                speed: 0.6,
+                direction: 'none',
+                random: true,
+                straight: false,
+                outModes: 'bounce'
+            }
+        },
+        interactivity: {
+            events: {
+                onHover: { enable: true, mode: 'bubble' },
+                onClick: { enable: true, mode: 'push' }
+            },
+            modes: {
+                bubble: { distance: 150, size: 5, opacity: 0.4 },
+                push: { quantity: 3 }
+            }
+        },
+        background: { color: 'transparent' },
+        detectRetina: true
+    });
+}
+
+window.loadParticles = loadParticles;
 
 /* ==========================================================
    VIEW TRANSITIONS API (Progressive Enhancement)
@@ -410,8 +375,9 @@ function navigateTo(componentPath) {
                     mainContent.classList.remove('page-exiting');
 
                     initInteractiveElements();
-                    loadMaestrosTicker();
-                    initScrollAnimations();
+                    loadMaestrosTicker().then(() => {
+                        initScrollAnimations();
+                    });
                     initScrollIndicator();
                     initRippleEffect();
                     initTilt3D();

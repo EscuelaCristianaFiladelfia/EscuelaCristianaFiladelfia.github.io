@@ -40,6 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
     loadComponent("main-content", "components/home.html").then(() => {
         initInteractiveElements();
         initScrollAnimations();
+        initScrollIndicator();
+        initRippleEffect();
+        initParticles();
         hideLoader();
     });
 });
